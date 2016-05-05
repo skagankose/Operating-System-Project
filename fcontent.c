@@ -25,13 +25,21 @@ int main() {
 	}
 
 	printf("Specify number of lines to display per page: ");
-	scanf("%d", &stepSize);
 
-	if (stepSize < 1) {
 
-		printf("%s", "Erro: Not a valid line number!\n" );
+	char term;
+	if(scanf("%d%c", &stepSize, &term) != 2 || term != '\n') {
+		printf("Error: Not a valid line number!\n");
 		return(-1);
+	} else {
+		if (stepSize < 0) {
+			printf("Error: Not a valid line number!\n");
+			return(-1);
+		} else {
+		printf("valid integer followed by enter key\n");
+		}
 	}
+
 
 	printf("\n");
 

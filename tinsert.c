@@ -44,14 +44,21 @@ int main()
     scanf("%s",inputString);
 
     printf("Enter the position to insert: ");
-    scanf("%d", &position);
+    // scanf("%d", &position);
 
-    if (position < 0) {
-
-        printf("%s", "Error: Not a valid position!\n");
+    char term;
+    if(scanf("%d%c", &position, &term) != 2 || term != '\n') {
+        printf("Error: Not a valid position!\n");
         return(-1);
-
+    } else {
+        if (position < 0) {
+            printf("Error: Not a valid position!\n");
+            return(-1);
+        } else {
+        printf("valid integer followed by enter key\n");
+        }
     }
+
 
     insert_substring(text, inputString, position);
 
