@@ -1,8 +1,8 @@
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
-
 
 int display_lines(int, int, char[]);
 
@@ -14,7 +14,6 @@ int main() {
 	int currentLine = 0;
 	int lower, upper = 0;
 	char ch;
-
 
 	printf("Enter a file name to display: ");
 	scanf("%s", fileName);
@@ -35,17 +34,12 @@ int main() {
 		if (stepSize < 0) {
 			printf("Error: Not a valid line number!\n");
 			return(-1);
-		} else {
-		printf("valid integer followed by enter key\n");
 		}
 	}
 
-
 	printf("\n");
 
-
 	while (1) {
-
 
 		upper = upper + stepSize;
 		result = display_lines(lower, upper, fileName);
@@ -55,11 +49,8 @@ int main() {
 			break;
 		}
 
-		if (upper == stepSize) {getchar();}
-
 		printf("\nPress enter to continue...\n");
 		getchar();
-
 
 	}
 
@@ -70,35 +61,36 @@ int display_lines(int min, int max, char name[8192]) {
 
 	FILE *file;
 	int lineNumber = 0;
+	FILE *fp;
+	char * line = NULL;
+	size_t len = 0;
+	ssize_t read;
 
-	file = fopen(name, "r");
+	fp = fopen(name, "r");
 
 	if (file == NULL) {
 	   printf("Error:Permission Denied!\n");
 	   exit(EXIT_FAILURE);
 	}
 
-	char str[8192];
+	while ((read = getline(&line, &len, fp)) != -1) {
 
-	while (fscanf(file, "%s", str)!=EOF) {
-
-		if(strncmp(str, "\n", 8192)) {
-			lineNumber++;
-		}
+		lineNumber++;
 
 		if (lineNumber>min && lineNumber<=max) {
+		   printf("%s", line);
+		   }
 
-			printf("%s\n", str);
+		  	if (lineNumber>max) {
+			  break;
+			 }
 
-		}
+   }
 
-		if (lineNumber>max) {
-			break;
-		}
+	fclose(fp);
+	if (line)
+		free(line);
 
-	}
-
-	fclose(file);
 
 	if (lineNumber == max+1) {
 		return -2;

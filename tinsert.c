@@ -54,11 +54,8 @@ int main()
         if (position < 0) {
             printf("Error: Not a valid position!\n");
             return(-1);
-        } else {
-        printf("valid integer followed by enter key\n");
         }
     }
-
 
     insert_substring(text, inputString, position);
 
@@ -68,7 +65,6 @@ int main()
 
     return(0);
 }
-
 
 // This function instert substring into positon on given text
 void insert_substring(char *main, char *addition, int position) {
