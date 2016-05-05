@@ -1,38 +1,50 @@
 #include <stdio.h>
+#include <unistd.h>
 
 int main() {
-   char ch, sourceName[1024], targetName[1024];
-   FILE *source, *target;
 
-   printf("Enter name of file to copy: ");
-	scanf("%s",sourceName);
+    FILE *source, *target;
+    char ch, sourceName[1024], targetName[1024];
 
-   source = fopen(sourceName, "r");
+    printf("Enter name of file to copy: ");
+    scanf("%s",sourceName);
 
-   if( source == NULL ) {
-      printf("Error: unable to copy...\n");
-      return(-1);
-   }
+    if( access( sourceName, F_OK ) == -1 ) {
+        printf("Error: There is no such file.\n");
+        return(-1);
+    }
 
-   printf("Enter name of target file: ");
+    source = fopen(sourceName, "r");
+
+    if( source == NULL ) {
+        printf("Error:Permission Denied!\n");
+        return(-1);
+    }
+
+   printf("Enter name of target: ");
    scanf("%s",targetName);
 
-   target = fopen(targetName, "w");
+    if (access( targetName, F_OK ) != -1) {
+        printf("Error: File already exist.\n");
+        return(-1);
+    }
 
-   if( target == NULL )
-   {
+    target = fopen(targetName, "wb");
+
+    if( target == NULL ) {
       fclose(source);
-      printf("Error: unable to copy...\n");
+      printf("Error:Permission Denied!\n");
       return(-1);
-   }
+    }
 
-   while( ( ch = fgetc(source) ) != EOF )
-      fputc(ch, target);
+    while ((ch = fgetc(source)) != EOF) {
+        fputc(ch, target);
+    }
 
    printf("File copied successfully.\n");
 
    fclose(source);
    fclose(target);
 
-   return 0;
+   return(0);
 }

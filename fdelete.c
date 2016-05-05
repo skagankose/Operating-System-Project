@@ -1,26 +1,31 @@
 #include <stdio.h>
+#include <unistd.h>
 
-int main () {
+int main() {
 
-   int ret;
-   // FILE *fp;
-   char fName[1024];
+    FILE *file;
+    int ret;
+    char fName[1024];
 
-	printf("Enter a file name: ");
-	scanf("%s", fName);
+    printf("Enter a file name: ");
+    scanf("%s", fName);
 
-   // fp = fopen(fName, "w");
-	//
-   // fprintf(fp, "%s", "This is tutorialspoint.com");
-   // fclose(fp);
+    printf("%s\n", fName);
 
-   ret = remove(fName);
+    if (access(fName, F_OK ) == -1) {
+        printf("Error: There is no such file.\n");
+        return(-1);
+   	}
 
-   if(ret == 0) {
-      printf("File deleted successfully.\n");
-   } else {
-      printf("Error: unable to delete the file.\n");
-   }
+    ret = remove(fName);
 
-   return(0);
+    if (ret == 0) {
+        printf("File deleted successfully.\n");
+    } else {
+        printf("Error: Permission Denied!\n");
+    }
+
+    return(0);
+
+
 }
