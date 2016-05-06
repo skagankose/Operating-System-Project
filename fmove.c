@@ -21,7 +21,7 @@ int main() {
        return(-1);
     }
 
-    printf("Enter name of target: ");
+    printf("Enter name of target file alon with the path: ");
     scanf("%s",targetName);
 
     if (access( targetName, F_OK ) != -1) {
@@ -29,7 +29,7 @@ int main() {
         return(-1);
     }
 
-    target = fopen(targetName, "w");
+    target = fopen(targetName, "wb");
 
     if( target == NULL ) {
         fclose(source);

@@ -31,7 +31,7 @@ int main() {
 		printf("Error: Not a valid line number!\n");
 		return(-1);
 	} else {
-		if (stepSize < 0) {
+		if (stepSize < 1) {
 			printf("Error: Not a valid line number!\n");
 			return(-1);
 		}
@@ -53,6 +53,9 @@ int main() {
 		getchar();
 
 	}
+
+	return(0);
+
 
 }
 
@@ -84,18 +87,17 @@ int display_lines(int min, int max, char name[8192]) {
 		  	if (lineNumber>max) {
 			  break;
 			 }
-
    }
 
 	fclose(fp);
 	if (line)
 		free(line);
 
-
 	if (lineNumber == max+1) {
 		return -2;
 	} else {
 		return -1;
 	}
+
 
 }

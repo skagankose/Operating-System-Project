@@ -5,7 +5,7 @@ int main() {
 
 	FILE *file;
 	int ret;
-	char oldName[1024], newName[1024];
+	char oldName[1024], newName[1024], mixName[8192];
 
 	printf("Enter a existing file name: ");
 	scanf("%s",oldName);
@@ -15,13 +15,12 @@ int main() {
 		return(-1);
 	}
 
-	printf("Enter a new name: ");
+	printf("Enter a new name along with the path: ");
 	scanf("%s",newName);
 
-	file = fopen(newName, "r");
-
-	if (access( oldName, F_OK ) != -1) {
+	if (access( newName, F_OK ) != -1) {
 		printf("Error: File name already exist.\n");
+		return(-1);
 	}
 
 	ret = rename(oldName, newName);
@@ -30,6 +29,7 @@ int main() {
       printf("File renamed successfully.\n");
    } else {
       printf("Error: Permission Denied!\n");
+	  return(-1);
    }
 
    return(0);

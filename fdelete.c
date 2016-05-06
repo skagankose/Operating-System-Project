@@ -10,8 +10,6 @@ int main() {
     printf("Enter a file name: ");
     scanf("%s", fName);
 
-    printf("%s\n", fName);
-
     if (access(fName, F_OK ) == -1) {
         printf("Error: There is no such file.\n");
         return(-1);

@@ -9,12 +9,13 @@ int main() {
 	printf("Enter a file name: ");
 	scanf("%s", fName);
 
-	if (access( fName, F_OK ) != -1) {
+	if (access(fName, F_OK ) != -1) {
 		printf("Error: File already exist.\n");
 		return(-1);
 	}
 
 	file = fopen(fName, "wb");
+
 	if (file) {
 		printf("File created successfully.\n");
 	} else {

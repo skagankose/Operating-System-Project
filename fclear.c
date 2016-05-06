@@ -16,7 +16,7 @@ int main() {
 		return(-1);
 	}
 
-	file = fopen(fileName, "w");
+	file = fopen(fileName, "wb");
 
 	if( file == NULL ) {
 	   printf("Error:Permission Denied!\n");

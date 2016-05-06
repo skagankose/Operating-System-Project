@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
+#define BUFFERSIZE 10
 
 
 void copy_string(char[], char[]);
@@ -15,6 +16,7 @@ int main()
     int position;
     int pos = 0;
     FILE *fp, *out;
+
 
     printf("Enter the file name to append: ");
     scanf("%s",fileName);
@@ -40,11 +42,26 @@ int main()
 
     copy_string(text, textVariable);
 
-    printf("Enter the string to insert: ");
-    scanf("%s",inputString);
+    printf("Enter the string to insert and press enter twice: ");
+    scanf("%s[$\n]", inputString);
+
+    char *result;
+    int len;
+    char buffer[1024];
+
+    while ((result = fgets(buffer, 1024, stdin)) != NULL) {
+
+        len = strlen (buffer);
+        if (len <= 1) {
+            break;
+        }
+
+        strcat(inputString, buffer);
+
+    }
+
 
     printf("Enter the position to insert: ");
-    // scanf("%d", &position);
 
     char term;
     if(scanf("%d%c", &position, &term) != 2 || term != '\n') {
@@ -65,6 +82,7 @@ int main()
 
     return(0);
 }
+
 
 // This function instert substring into positon on given text
 void insert_substring(char *main, char *addition, int position) {
