@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-int main() {
+int rnameFile() {
 
 	FILE *file;
 	int ret;

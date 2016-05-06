@@ -6,7 +6,7 @@
 
 int display_lines(int, int, char[]);
 
-int main() {
+int contentFile() {
 
 	FILE *file;
 	int ret, lineNumber, stepSize, result;

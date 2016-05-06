@@ -3,7 +3,7 @@
 
 #define MAX_SZ 256
 
-int main() {
+int tappendFile() {
 
 	FILE *out;
 	char textToAppend[4096];

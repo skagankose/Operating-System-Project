@@ -9,7 +9,7 @@ void copy_string(char[], char[]);
 void insert_substring(char*, char*, int);
 char* substring(char*, int, int);
 
-int main()
+int tinsertFile()
 {
     char text[8192], inputString[8192], fileName[8192], textVariable[8192];
     char ch;

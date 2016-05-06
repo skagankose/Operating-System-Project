@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-int main() {
+int createFile() {
 
 	FILE *file;
 	char fName[1024], str[1024];
