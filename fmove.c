@@ -41,7 +41,7 @@ int moveFile() {
         fputc(ch, target);
     }
 
-   printf("File moved successfully.\n");
+    printf("Success.\n");
 
    fclose(source);
    fclose(target);

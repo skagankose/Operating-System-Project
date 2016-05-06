@@ -24,5 +24,7 @@ int clearFile() {
 	}
 
 	fclose(file);
+
+	printf("Success.\n");
 	return(0);
 }

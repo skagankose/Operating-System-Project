@@ -29,6 +29,8 @@ int tappendFile() {
 
 	fprintf(out, "%s", textToAppend);
 	fclose(out);
+
+	printf("Success.\n");
 	return(0);
 
 }

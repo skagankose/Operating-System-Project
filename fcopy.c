@@ -41,7 +41,7 @@ int copyFile() {
         fputc(ch, target);
     }
 
-   printf("File copied successfully.\n");
+    printf("Success.\n");
 
    fclose(source);
    fclose(target);

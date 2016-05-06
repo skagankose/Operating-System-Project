@@ -17,7 +17,7 @@ int createFile() {
 	file = fopen(fName, "wb");
 
 	if (file) {
-		printf("File created successfully.\n");
+		printf("Success.\n");
 	} else {
 		printf("Error: Permission Denied!\n");
 	}

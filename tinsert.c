@@ -80,6 +80,8 @@ int tinsertFile()
     fprintf(out, "%s", text);
     fclose(out);
 
+    printf("Success.\n");
+
     return(0);
 }
 
@@ -106,6 +108,7 @@ void insert_substring(char *main, char *addition, int position) {
     strcat(main, tmpFirst);
     strcat(main, addition);
     strcat(main, tmpSecond);
+
     free(tmpFirst);
     free(tmpSecond);
 }

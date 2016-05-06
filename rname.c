@@ -26,7 +26,7 @@ int rnameFile() {
 	ret = rename(oldName, newName);
 
 	if (ret == 0) {
-      printf("File renamed successfully.\n");
+		printf("Success.\n");
    } else {
       printf("Error: Permission Denied!\n");
 	  return(-1);

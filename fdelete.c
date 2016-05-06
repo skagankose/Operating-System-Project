@@ -18,7 +18,7 @@ int deleteFile() {
     ret = remove(fName);
 
     if (ret == 0) {
-        printf("File deleted successfully.\n");
+        printf("Success.\n");
     } else {
         printf("Error: Permission Denied!\n");
     }

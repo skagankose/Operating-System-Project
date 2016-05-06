@@ -54,6 +54,8 @@ int contentFile() {
 
 	}
 
+	printf("\nSuccess.\n");
+
 	return(0);
 
 
