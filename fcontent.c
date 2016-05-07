@@ -9,6 +9,7 @@ int display_lines(int, int, char[]);
 int contentFile() {
 
 	FILE *file;
+	FILE *test;
 	int ret, lineNumber, stepSize, result;
 	char fileName[8192], str[8192];
 	int currentLine = 0;
@@ -22,6 +23,15 @@ int contentFile() {
 		printf("Error: There is no such file.\n");
 		return(-1);
 	}
+
+	test = fopen(fileName, "r");
+
+	if (test == NULL) {
+	   printf("Error:Permission Denied!\n");
+	   return(-1);
+	}
+
+	fclose(test);
 
 	printf("Specify number of lines to display per page: ");
 
@@ -75,7 +85,7 @@ int display_lines(int min, int max, char name[8192]) {
 
 	if (file == NULL) {
 	   printf("Error:Permission Denied!\n");
-	   exit(EXIT_FAILURE);
+	   return(-1);
 	}
 
 	while ((read = getline(&line, &len, fp)) != -1) {

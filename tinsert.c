@@ -6,7 +6,7 @@
 
 
 void copy_string(char[], char[]);
-void insert_substring(char*, char*, int);
+int insert_substring(char*, char*, int);
 char* substring(char*, int, int);
 
 int tinsertFile()
@@ -18,7 +18,7 @@ int tinsertFile()
     FILE *fp, *out;
 
 
-    printf("Enter the file name to append: ");
+    printf("Enter the file name to insert: ");
     scanf("%s",fileName);
 
     if( access( fileName, F_OK ) == -1 ) {
@@ -74,7 +74,11 @@ int tinsertFile()
         }
     }
 
-    insert_substring(text, inputString, position);
+    int tmp = insert_substring(text, inputString, position);
+
+    if (tmp == -1) {
+        return(-1);
+    }
 
     out = fopen(fileName, "w");
     fprintf(out, "%s", text);
@@ -87,15 +91,15 @@ int tinsertFile()
 
 
 // This function instert substring into positon on given text
-void insert_substring(char *main, char *addition, int position) {
+int insert_substring(char *main, char *addition, int position) {
     char *tmpFirst, *tmpSecond;
     int length;
 
     length = strlen(main);
 
     if (position > length) {
-      printf("%s\n", "Error: Position cxceeds the Length of the file.");
-      exit(EXIT_FAILURE);
+      printf("%s\n", "Error: Position exceeds the Length of the file.");
+      return(-1);
     }
 
     // Extract the substring until position
@@ -111,6 +115,7 @@ void insert_substring(char *main, char *addition, int position) {
 
     free(tmpFirst);
     free(tmpSecond);
+    return(0);
 }
 
 

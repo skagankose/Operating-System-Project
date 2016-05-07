@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include <unistd.h>
-
+#define BUFFERSIZE 10
 #define MAX_SZ 256
 
 int tappendFile() {
@@ -9,8 +11,24 @@ int tappendFile() {
 	char textToAppend[4096];
 	char fileName[1024];
 
-	printf("Enter text to append: ");
-	fgets(textToAppend, MAX_SZ, stdin);
+	printf("Enter text to append and press enter twice: ");
+	scanf("%s[$\n]", textToAppend);
+
+	char *result;
+	int len;
+	char buffer[1024];
+
+	while ((result = fgets(buffer, 1024, stdin)) != NULL) {
+
+		len = strlen (buffer);
+		if (len <= 1) {
+			break;
+		}
+
+		strcat(textToAppend, buffer);
+
+	}
+
 
 	printf("Enter a existing file name: ");
 	scanf("%s", fileName);
