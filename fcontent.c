@@ -1,10 +1,10 @@
-#define _GNU_SOURCE
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
 
-int display_lines(int, int, char[]);
+int displayLines(FILE *file, int minLine, int maxLine);
+int getLineNumber(FILE *file);
 
 int contentFile() {
 
@@ -13,7 +13,6 @@ int contentFile() {
 	int ret, lineNumber, stepSize, result;
 	char fileName[8192], str[8192];
 	int currentLine = 0;
-	int lower, upper = 0;
 	char ch;
 
 	printf("Enter a file name to display: ");
@@ -47,69 +46,75 @@ int contentFile() {
 		}
 	}
 
-	printf("\n");
+	// int l = getLineNumber(test);
+	int lower = 0;
+	int upper = 0;
+
+	char line[256];
+	int totalLines;
+
+	test = fopen(fileName, "r");
+
+	while (fgets(line, sizeof(line), test)) {
+		/* note that fgets don't strip the terminating \n, checking its
+		   presence would allow to handle lines longer that sizeof(line) */
+
+		totalLines++;
+
+	}
+
+	fclose(test);
 
 	while (1) {
 
-		upper = upper + stepSize;
-		result = display_lines(lower, upper, fileName);
-		lower = lower + stepSize;
+		if (upper < totalLines-1) {
 
-		if (result == -1) {
+
+			upper = upper + stepSize;
+
+			char line[256];
+			int lineNumber = 1;
+
+			test = fopen(fileName, "r");
+
+			while (fgets(line, sizeof(line), test)) {
+				/* note that fgets don't strip the terminating \n, checking its
+				   presence would allow to handle lines longer that sizeof(line) */
+
+				if (lineNumber >= lower && lineNumber <= upper) {
+					printf("%s", line);
+				}
+
+				lineNumber++;
+
+
+			}
+
+			fclose(test);
+
+			lower = upper + 1;
+
+		} else {
 			break;
 		}
 
-		printf("\nPress enter to continue...\n");
-		getchar();
+		int c;
+		do {
+		    c = getchar();
+		}while(c != '\n' && c != EOF);
+		if (c == EOF) {
+		    // input stream ended, do something about it, exit perhaps
+		} else {
+		    printf("Type Enter to continue\n");
+		    getchar();
+		}
+
 
 	}
 
 	printf("\nSuccess.\n");
 
 	return(0);
-
-
-}
-
-// This function display the lines from min to max for a given array
-int display_lines(int min, int max, char name[8192]) {
-
-	FILE *file;
-	int lineNumber = 0;
-	FILE *fp;
-	char * line = NULL;
-	size_t len = 0;
-	ssize_t read;
-
-	fp = fopen(name, "r");
-
-	if (file == NULL) {
-	   printf("Error:Permission Denied!\n");
-	   return(-1);
-	}
-
-	while ((read = getline(&line, &len, fp)) != -1) {
-
-		lineNumber++;
-
-		if (lineNumber>min && lineNumber<=max) {
-		   printf("%s", line);
-		   }
-
-		  	if (lineNumber>max) {
-			  break;
-			 }
-   }
-
-	fclose(fp);
-	if (line)
-		free(line);
-
-	if (lineNumber == max+1) {
-		return -2;
-	} else {
-		return -1;
-	}
 
 
 }
