@@ -46,18 +46,15 @@ int contentFile() {
 		}
 	}
 
-	// int l = getLineNumber(test);
 	int lower = 0;
 	int upper = 0;
 
 	char line[256];
-	int totalLines;
+	int totalLines = 0;
 
 	test = fopen(fileName, "r");
 
 	while (fgets(line, sizeof(line), test)) {
-		/* note that fgets don't strip the terminating \n, checking its
-		   presence would allow to handle lines longer that sizeof(line) */
 
 		totalLines++;
 
@@ -78,15 +75,12 @@ int contentFile() {
 			test = fopen(fileName, "r");
 
 			while (fgets(line, sizeof(line), test)) {
-				/* note that fgets don't strip the terminating \n, checking its
-				   presence would allow to handle lines longer that sizeof(line) */
 
 				if (lineNumber >= lower && lineNumber <= upper) {
 					printf("%s", line);
 				}
 
 				lineNumber++;
-
 
 			}
 
@@ -95,20 +89,20 @@ int contentFile() {
 			lower = upper + 1;
 
 		} else {
+
 			break;
 		}
 
 		int c;
 		do {
 		    c = getchar();
-		}while(c != '\n' && c != EOF);
+		} while(c != '\n' && c != EOF);
 		if (c == EOF) {
-		    // input stream ended, do something about it, exit perhaps
+		    // Input stream ended.
 		} else {
 		    printf("Type Enter to continue\n");
 		    getchar();
 		}
-
 
 	}
 
