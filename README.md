@@ -1,3 +1,3 @@
-# Operating-System-Project
+# PFM
 
-This repository is created for Portable File Manipulator source codes.
+This is the repository for the project called portable file manipulator which is a simple cross-platform file manipulator.
